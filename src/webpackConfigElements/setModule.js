@@ -20,6 +20,14 @@ const setModule = (config, {name}) => {
           },
         },
         {
+          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
+          loader: require.resolve('url-loader'),
+          options: {
+            limit: 10000,
+            name: '/static/media/[name].[hash:8].[ext]',
+          },
+        },
+        {
           test: /\.css$/,
           exclude: [path.resolve(process.cwd(), 'node_modules'), /\.krem.css$/],
           use: [

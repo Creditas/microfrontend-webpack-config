@@ -1,5 +1,5 @@
 {
-  "name": "microfront-webpack-config",
+  "name": "@creditas/microfront-webpack-config",
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",

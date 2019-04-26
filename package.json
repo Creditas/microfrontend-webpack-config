@@ -1,5 +1,5 @@
 {
-  "name": "@creditas/microfront-webpack-config",
+  "name": "@creditas/microfrontend-webpack-config",
   "version": "1.0.3",
   "description": "Some defaults for webpack configs at Creditas",
   "license": "MIT",

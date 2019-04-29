@@ -1,6 +1,5 @@
 const path = require('path')
 const autoprefixer = require('autoprefixer')
-const babelLoader = require('babel-loader')
 
 const setModule = (config, {name}) => {
   return {
@@ -10,7 +9,7 @@ const setModule = (config, {name}) => {
         {
           test: /\.js?$/,
           exclude: [path.resolve(process.cwd(), 'node_modules')],
-          loader: babelLoader,
+          loader: require.resolve('babel-loader'),
           options: {
             plugins: ['@babel/plugin-transform-runtime'],
           },

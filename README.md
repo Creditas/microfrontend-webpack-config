@@ -13,7 +13,7 @@ file, call the `webpackConfigModuleApp()` function to get some defaults and add/
 ```js
 // webpack.config.js
 
-const {webpackConfigModuleApp} = require('@creditas/microfront-webpack-config')
+const {webpackConfigModuleApp} = require('@creditas/microfrontend-webpack-config')
 
 module.exports = webpackConfigModuleApp('calculator', {
   // Override or add anything you want to your webpack config

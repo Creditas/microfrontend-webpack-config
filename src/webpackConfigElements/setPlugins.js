@@ -1,16 +1,16 @@
-const path = require('path')
+const path = require('path');
 const {
   BannerPlugin,
   NamedModulesPlugin,
   HotModuleReplacementPlugin,
-} = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+} = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin
-const DotEnvPlugin = require('dotenv-webpack')
-const {UnusedFilesWebpackPlugin} = require('unused-files-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin')
+  .BundleAnalyzerPlugin;
+const DotEnvPlugin = require('dotenv-webpack');
+const {UnusedFilesWebpackPlugin} = require('unused-files-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
 const setPlugins = (config, {envs, dotEnvFile}) => {
   return {
@@ -38,15 +38,14 @@ const setPlugins = (config, {envs, dotEnvFile}) => {
           ],
         },
       }),
-      envs.standalone &&
-        new HtmlWebpackPlugin({
-          template: path.resolve(process.cwd(), './public/index.html'),
-        }),
-      envs.standalone && new InterpolateHtmlPlugin(HtmlWebpackPlugin, envs),
+      new HtmlWebpackPlugin({
+        template: path.resolve(process.cwd(), './public/index.html'),
+      }),
+      new InterpolateHtmlPlugin(HtmlWebpackPlugin, envs),
       envs.isDevServer && new NamedModulesPlugin(),
       envs.isDevServer && new HotModuleReplacementPlugin(),
     ].filter(Boolean),
-  }
-}
+  };
+};
 
-module.exports = {setPlugins}
+module.exports = {setPlugins};

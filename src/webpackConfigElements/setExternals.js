@@ -1,6 +1,6 @@
-const externals = isDevServer => {
-  if (isDevServer) {
-    return {}
+const externals = (isDevServer, rootApp) => {
+  if (isDevServer || rootApp) {
+    return {};
   }
 
   return {
@@ -12,14 +12,14 @@ const externals = isDevServer => {
       /^react-dom$/,
       /.*react-dom.*/,
     ],
-  }
-}
+  };
+};
 
 const setExternals = (config, {envs}) => {
   return {
     ...config,
-    ...externals(envs.isDevServer),
-  }
-}
+    ...externals(envs.isDevServer, envs.rootApp),
+  };
+};
 
-module.exports = {setExternals}
+module.exports = {setExternals};

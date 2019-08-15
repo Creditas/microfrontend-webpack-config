@@ -1,6 +1,6 @@
 {
   "name": "@creditas/microfrontend-webpack-config",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Some defaults for webpack configs at Creditas",
   "license": "MIT",
   "main": "src/main.js",

@@ -1,7 +1,7 @@
 const merge = require('webpack-merge');
 const dotEnv = require('dotenv');
-const {errorParamName, errorParamOverrides} = require('./messages');
-const {isNotString, isNotObjFn, isFn, getEnvFile, log} = require('./helpers');
+const {errorParamOverrides} = require('./messages');
+const {isNotObjFn, isFn, getEnvFile, log} = require('./helpers');
 const {
   setMode,
   setEntry,

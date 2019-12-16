@@ -8,6 +8,7 @@ const isDev = value => value === 'development'
 const isTest = value => value === 'test'
 const isStg = value => value === 'staging'
 const isProd = value => value === 'production'
+
 const log = debug => message => debug && console.log(message) //eslint-disable-line no-console
 
 const getEnvFile = environment => {

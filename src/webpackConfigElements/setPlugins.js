@@ -31,13 +31,10 @@ const setPlugins = (config, {envs, dotEnvFile}) => {
         globOptions: {
           cwd: path.resolve(process.cwd(), 'src'),
           ignore: [
-            '**/*.test.js',
-            '**/*.test.ts',
-            '**/*.spec.js',
-            '**/*.spec.ts',
-            '**/*.js.snap',
-            '**/test-setup.js',
-            '**/test-setup.ts',
+            '**/*.test.*',
+            '**/*.spec.*',
+            '**/*.*.snap',
+            '**/test-setup.*',
           ],
         },
       }),

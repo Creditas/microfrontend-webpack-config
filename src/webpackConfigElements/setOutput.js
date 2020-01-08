@@ -7,6 +7,7 @@ const target = (rootApp, name) => {
   return {
     library: name,
     libraryTarget: 'amd',
+    publicPath: `/${name}`,
   };
 };
 

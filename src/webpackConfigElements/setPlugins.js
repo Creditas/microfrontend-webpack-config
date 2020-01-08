@@ -5,6 +5,7 @@ const {
   HotModuleReplacementPlugin,
 } = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 const DotEnvPlugin = require('dotenv-webpack');
@@ -27,23 +28,29 @@ const setPlugins = (config, {envs, dotEnvFile}) => {
       new BundleAnalyzerPlugin({
         analyzerMode: envs.analyze || 'disabled',
       }),
-      new UnusedFilesWebpackPlugin({
-        globOptions: {
-          cwd: path.resolve(process.cwd(), 'src'),
-          ignore: [
-            '**/*.test.js',
-            '**/*.spec.js',
-            '**/*.js.snap',
-            '**/test-setup.js',
-          ],
-        },
-      }),
+      !envs.rootApp &&
+        new UnusedFilesWebpackPlugin({
+          globOptions: {
+            cwd: path.resolve(process.cwd(), 'src'),
+            ignore: [
+              '**/*.test.js',
+              '**/*.spec.js',
+              '**/*.js.snap',
+              '**/test-setup.js',
+              '**/index.root.js',
+            ],
+          },
+        }),
       new HtmlWebpackPlugin({
         template: path.resolve(process.cwd(), './public/index.html'),
       }),
       new InterpolateHtmlPlugin(HtmlWebpackPlugin, envs),
       envs.isDevServer && new NamedModulesPlugin(),
       envs.isDevServer && new HotModuleReplacementPlugin(),
+      envs.rootApp &&
+        new CopyWebpackPlugin([
+          {from: path.resolve(process.cwd(), './public')},
+        ]),
     ].filter(Boolean),
   };
 };

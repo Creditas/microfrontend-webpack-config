@@ -1,5 +1,5 @@
-const path = require('path')
-const autoprefixer = require('autoprefixer')
+const path = require('path');
+const autoprefixer = require('autoprefixer');
 
 const setModule = (config, {name}) => {
   return {
@@ -10,9 +10,6 @@ const setModule = (config, {name}) => {
           test: /\.js?$/,
           exclude: [path.resolve(process.cwd(), 'node_modules')],
           loader: require.resolve('babel-loader'),
-          options: {
-            plugins: ['@babel/plugin-transform-runtime'],
-          },
         },
         {
           parser: {
@@ -43,7 +40,7 @@ const setModule = (config, {name}) => {
               loader: 'postcss-loader',
               options: {
                 plugins() {
-                  return [autoprefixer]
+                  return [autoprefixer];
                 },
               },
             },
@@ -74,7 +71,7 @@ const setModule = (config, {name}) => {
         },
       ],
     },
-  }
-}
+  };
+};
 
-module.exports = {setModule}
+module.exports = {setModule};

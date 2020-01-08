@@ -28,19 +28,18 @@ const setPlugins = (config, {envs, dotEnvFile}) => {
       new BundleAnalyzerPlugin({
         analyzerMode: envs.analyze || 'disabled',
       }),
-      !envs.rootApp &&
-        new UnusedFilesWebpackPlugin({
-          globOptions: {
-            cwd: path.resolve(process.cwd(), 'src'),
-            ignore: [
-              '**/*.test.js',
-              '**/*.spec.js',
-              '**/*.js.snap',
-              '**/test-setup.js',
-              '**/index.root.js',
-            ],
-          },
-        }),
+      new UnusedFilesWebpackPlugin({
+        globOptions: {
+          cwd: path.resolve(process.cwd(), 'src'),
+          ignore: [
+            '**/*.test.*',
+            '**/*.spec.*',
+            '**/*.*.snap',
+            '**/test-setup.*',
+            !envs.rootApp && '**/index.root.js',
+          ].filter(Boolean),
+        },
+      }),
       new HtmlWebpackPlugin({
         template: path.resolve(process.cwd(), './public/index.html'),
       }),

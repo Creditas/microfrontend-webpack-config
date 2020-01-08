@@ -36,7 +36,7 @@ const setPlugins = (config, {envs, dotEnvFile}) => {
             '**/*.spec.*',
             '**/*.*.snap',
             '**/test-setup.*',
-            !envs.rootApp && '**/index.root.js',
+            !envs.rootApp && '**/index.root.*',
           ].filter(Boolean),
         },
       }),

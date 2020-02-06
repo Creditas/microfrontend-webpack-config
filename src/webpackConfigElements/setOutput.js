@@ -11,7 +11,7 @@ const target = (rootApp, name) => {
   };
 };
 
-const setOutput = (config, {envs, name}) => {
+const setOutput = ({envs, name}) => config => {
   const rootFileName = 'index.root.js';
   const moduleFileName = 'index.singlespa.js';
   const filename = envs.rootApp ? rootFileName : moduleFileName;

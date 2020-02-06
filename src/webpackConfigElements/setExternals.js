@@ -15,7 +15,7 @@ const externals = (isDevServer, rootApp) => {
   };
 };
 
-const setExternals = (config, {envs}) => {
+const setExternals = ({envs}) => config => {
   return {
     ...config,
     ...externals(envs.isDevServer, envs.rootApp),

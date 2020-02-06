@@ -1,6 +1,6 @@
 const path = require('path');
 
-const setEntry = (config, {envs}) => {
+const setEntry = ({envs}) => config => {
   const rootFile = './src/index.root.js';
   const moduleFile = './src/index.singlespa.js';
   const entryFile = envs.rootApp ? rootFile : moduleFile;

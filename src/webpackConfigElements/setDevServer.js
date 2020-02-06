@@ -15,7 +15,7 @@ const devServer = isDevServer => {
   }
 }
 
-const setDevServer = (config, {envs}) => {
+const setDevServer = ({envs}) => config => {
   return {
     ...config,
     ...devServer(envs.isDevServer),

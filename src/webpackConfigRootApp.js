@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const dotEnv = require('dotenv');
+const R = require('ramda');
 const {errorParamOverrides} = require('./messages');
 const {isNotObjFn, isFn, getEnvFile, log} = require('./helpers');
 const {
@@ -39,34 +40,17 @@ const webpackConfigRootApp = (overridesConfig = {}) => {
     const dotEnvFile = getEnvFile(environment);
     const debug = log(envs.debug);
 
-    let defaultConfig = {};
-
-    // mode
-    defaultConfig = setMode(defaultConfig, {envs});
-
-    // entry
-    defaultConfig = setEntry(defaultConfig, {envs});
-
-    // output
-    defaultConfig = setOutput(defaultConfig, {envs});
-
-    // module
-    defaultConfig = setModule(defaultConfig, {envs});
-
-    // resolve
-    defaultConfig = setResolve(defaultConfig, {envs});
-
-    // plugins
-    defaultConfig = setPlugins(defaultConfig, {envs, dotEnvFile});
-
-    // devtool
-    defaultConfig = setDevtool(defaultConfig, {envs});
-
-    // externals
-    defaultConfig = setExternals(defaultConfig, {envs});
-
-    // devServer
-    defaultConfig = setDevServer(defaultConfig, {envs});
+    let defaultConfig = R.pipe(
+      setMode({envs}), // mode
+      setEntry({envs}), // entry
+      setOutput({envs}), // output
+      setModule({envs}), // module
+      setResolve, // resolve
+      setPlugins({envs, dotEnvFile}), // plugins
+      setDevtool, // devtool
+      setExternals({envs}), // externals
+      setDevServer({envs}), // devServer
+    )({});
 
     overridesConfig = isFn(overridesConfig)
       ? overridesConfig(envs)

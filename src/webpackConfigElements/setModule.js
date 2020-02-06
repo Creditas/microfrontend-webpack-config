@@ -1,7 +1,7 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 
-const setModule = (config, {name}) => {
+const setModule = ({name}) => config => {
   return {
     ...config,
     module: {

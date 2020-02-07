@@ -1,4 +1,4 @@
-const setMode = (config, {envs}) => {
+const setMode = ({envs}) => config => {
   return {
     ...config,
     mode: envs.dev || envs.isDevServer ? 'development' : 'production',

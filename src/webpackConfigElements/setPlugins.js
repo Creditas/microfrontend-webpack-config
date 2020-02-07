@@ -13,7 +13,7 @@ const {UnusedFilesWebpackPlugin} = require('unused-files-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
-const setPlugins = (config, {envs, dotEnvFile}) => {
+const setPlugins = ({envs, dotEnvFile}) => config => {
   return {
     ...config,
     plugins: [

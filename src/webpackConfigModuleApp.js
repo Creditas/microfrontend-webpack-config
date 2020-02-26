@@ -41,8 +41,8 @@ const webpackConfigModuleApp = (name, overridesConfig = {}) => {
     let defaultConfig = R.pipe(
       setMode({envs}), // mode
       setEntry({envs}), // entry
-      setOutput({envs}), // output
-      setModule({envs}), // module
+      setOutput({envs, name}), // output
+      setModule({envs, name}), // module
       setResolve, // resolve
       setPlugins({envs, dotEnvFile}), // plugins
       setDevtool, // devtool

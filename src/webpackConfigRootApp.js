@@ -1,6 +1,7 @@
 const merge = require('webpack-merge');
 const dotEnv = require('dotenv');
 const R = require('ramda');
+const path = require('path');
 const {errorParamOverrides} = require('./messages');
 const {isNotObjFn, isFn, getEnvFile, log} = require('./helpers');
 const {
@@ -15,8 +16,6 @@ const {
   setDevServer,
 } = require('./webpackConfigElements');
 
-dotEnv.config();
-
 let isDevServer = false;
 
 if (process.argv.some(arg => arg.includes('webpack-dev-server'))) {
@@ -29,16 +28,22 @@ const webpackConfigRootApp = (overridesConfig = {}) => {
   }
 
   return (env = {}) => {
-    const envs = {
+    let localEnvs = {
       rootApp: true,
       PUBLIC_URL: '',
       isDevServer,
       ...process.env,
       ...env,
     };
-    const {environment} = envs;
+    const {environment} = localEnvs;
     const dotEnvFile = getEnvFile(environment);
-    const debug = log(envs.debug);
+    const debug = log(localEnvs.debug);
+    const resultEnv = dotEnv.config({
+      path: path.resolve(process.cwd(), dotEnvFile),
+    });
+
+    const envs = {...localEnvs, ...resultEnv.parsed};
+    debug({envs});
 
     let defaultConfig = R.pipe(
       setMode({envs}), // mode

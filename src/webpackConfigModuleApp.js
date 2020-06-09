@@ -15,8 +15,6 @@ const {
   setDevServer,
 } = require('./webpackConfigElements');
 
-dotEnv.config();
-
 let isDevServer = false;
 
 if (process.argv.some(arg => arg.includes('webpack-dev-server'))) {
@@ -33,10 +31,17 @@ const webpackConfigModuleApp = (name, overridesConfig = {}) => {
   }
 
   return (env = {}) => {
-    const envs = {PUBLIC_URL: '', isDevServer, ...process.env, ...env};
-    const {environment} = envs;
+    const localEnvs = {PUBLIC_URL: '', isDevServer, ...process.env, ...env};
+    const {environment} = localEnvs;
     const dotEnvFile = getEnvFile(environment);
-    const debug = log(envs.debug);
+    const debug = log(localEnvs.debug);
+
+    const resultEnv = dotEnv.config({
+      path: path.resolve(process.cwd(), dotEnvFile),
+    });
+
+    const envs = {...localEnvs, ...resultEnv.parsed};
+    debug({envs});
 
     let defaultConfig = R.pipe(
       setMode({envs}), // mode

@@ -24,6 +24,7 @@
     "dotenv": "^7.0.0",
     "dotenv-webpack": "^1.7.0",
     "file-loader": "^5.0.2",
+    "fork-ts-checker-webpack-plugin": "^5.0.4",
     "html-webpack-plugin": "^4.0.0-alpha.7",
     "kremling-loader": "^1.0.2",
     "postcss-loader": "^3.0.0",

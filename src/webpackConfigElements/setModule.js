@@ -7,7 +7,7 @@ const setModule = ({name}) => config => {
     module: {
       rules: [
         {
-          test: /\.js?$/,
+          test: /\.(js|ts|tsx)?$/,
           exclude: [path.resolve(process.cwd(), 'node_modules')],
           loader: require.resolve('babel-loader'),
         },

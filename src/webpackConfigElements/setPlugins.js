@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const {
   BannerPlugin,
   NamedModulesPlugin,
@@ -12,6 +13,9 @@ const DotEnvPlugin = require('dotenv-webpack');
 const {UnusedFilesWebpackPlugin} = require('unused-files-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
+const useTypeScript = fs.existsSync('tsconfig.json');
 
 const setPlugins = ({envs, dotEnvFile}) => config => {
   return {
@@ -50,6 +54,15 @@ const setPlugins = ({envs, dotEnvFile}) => config => {
         new CopyWebpackPlugin([
           {from: path.resolve(process.cwd(), './public')},
         ]),
+      useTypeScript &&
+        new ForkTsCheckerWebpackPlugin({
+          typescript: {
+            diagnosticOptions: {
+              semantic: true,
+              syntactic: true,
+            },
+          },
+        }),
     ].filter(Boolean),
   };
 };

@@ -1,8 +1,9 @@
-const merge = require('webpack-merge');
-const dotEnv = require('dotenv');
-const R = require('ramda');
-const {errorParamName, errorParamOverrides} = require('./messages');
-const {isNotString, isNotObjFn, isFn, getEnvFile, log} = require('./helpers');
+const merge = require("webpack-merge");
+const dotEnv = require("dotenv");
+const path = require("path");
+const R = require("ramda");
+const { errorParamName, errorParamOverrides } = require("./messages");
+const { isNotString, isNotObjFn, isFn, getEnvFile, log } = require("./helpers");
 const {
   setMode,
   setEntry,
@@ -13,11 +14,11 @@ const {
   setDevtool,
   setExternals,
   setDevServer,
-} = require('./webpackConfigElements');
+} = require("./webpackConfigElements");
 
 let isDevServer = false;
 
-if (process.argv.some(arg => arg.includes('webpack-dev-server'))) {
+if (process.argv.some((arg) => arg.includes("webpack-dev-server"))) {
   isDevServer = true;
 }
 
@@ -31,8 +32,8 @@ const webpackConfigModuleApp = (name, overridesConfig = {}) => {
   }
 
   return (env = {}) => {
-    const localEnvs = {PUBLIC_URL: '', isDevServer, ...process.env, ...env};
-    const {environment} = localEnvs;
+    const localEnvs = { PUBLIC_URL: "", isDevServer, ...process.env, ...env };
+    const { environment } = localEnvs;
     const dotEnvFile = getEnvFile(environment);
     const debug = log(localEnvs.debug);
 
@@ -40,19 +41,19 @@ const webpackConfigModuleApp = (name, overridesConfig = {}) => {
       path: path.resolve(process.cwd(), dotEnvFile),
     });
 
-    const envs = {...localEnvs, ...resultEnv.parsed};
-    debug({envs});
+    const envs = { ...localEnvs, ...resultEnv.parsed };
+    debug({ envs });
 
     let defaultConfig = R.pipe(
-      setMode({envs}), // mode
-      setEntry({envs}), // entry
-      setOutput({envs, name}), // output
-      setModule({envs, name}), // module
+      setMode({ envs }), // mode
+      setEntry({ envs }), // entry
+      setOutput({ envs, name }), // output
+      setModule({ envs, name }), // module
       setResolve, // resolve
-      setPlugins({envs, dotEnvFile}), // plugins
+      setPlugins({ envs, dotEnvFile }), // plugins
       setDevtool, // devtool
-      setExternals({envs}), // externals
-      setDevServer({envs}), // devServer
+      setExternals({ envs }), // externals
+      setDevServer({ envs }) // devServer
     )({});
 
     overridesConfig = isFn(overridesConfig)
@@ -61,8 +62,8 @@ const webpackConfigModuleApp = (name, overridesConfig = {}) => {
 
     const finalConfig = merge.smart(defaultConfig, overridesConfig);
 
-    debug({name, overridesConfig});
-    debug({finalConfig: JSON.stringify(finalConfig)});
+    debug({ name, overridesConfig });
+    debug({ finalConfig: JSON.stringify(finalConfig) });
 
     return finalConfig;
   };

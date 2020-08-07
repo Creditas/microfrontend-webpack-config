@@ -1,6 +1,6 @@
 {
   "name": "@creditas-lib/microfrontend-webpack-config",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Some defaults for webpack configs at Creditas",
   "license": "MIT",
   "main": "src/main.js",
@@ -9,7 +9,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["microfrontends", "webpack", "single-spa", "react"],
+  "keywords": [
+    "microfrontends",
+    "webpack",
+    "single-spa",
+    "react"
+  ],
   "peerDependencies": {
     "@babel/plugin-transform-runtime": ">=7",
     "@babel/runtime": ">=7"
